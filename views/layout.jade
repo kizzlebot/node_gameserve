@@ -1,0 +1,85 @@
+doctype html
+html
+  head
+    title GameServe
+    link(href='/css/style.css', rel='stylesheet', type='text/css')
+    script(src='https://maps.googleapis.com/maps/api/js?v=3.exp')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js')
+    script(src='/js/jquery.cookie.js')
+    script(src='/js/waypoints.js')
+    script(src='/js/infinitescroll.js')
+    script(src='/js/header.js')
+    link(rel='shortcut icon', href='/assets/titleIconGS.gif', type='image/gif')
+    // {% block preReqs %}{% endblock %}
+    block preReqs
+  body
+    #content
+      #fader
+      header
+        section.center.head
+          a(href='/'): img#logo(src='/assets/gsLogo.svg')
+          // {# If user is logged in then show buttn to logout/create a game #}
+          // {% if request.user.is_authenticated %}
+          //- #logout.headerLink
+          //-   | logout
+          //-   .linkSlider
+          //- #user.headerLink
+          //-   // {{ request.user.username }}
+          //-   .linkSlider
+          //- #create.headerLink
+          //-   | create a game
+          //-   .linkSlider
+          // {# If user not logged in then show button to login or register #}
+          // {% else %}
+          #login.headerLink
+            | login
+            .linkSlider
+          #register.headerLink
+            | register
+            .linkSlider
+          form#loginDropdown.hidden
+            input#csrf(type='hidden', name='csrfmiddlewaretoken', value='')
+            .loginBlock
+              h5 email or username:
+              input#emailInput.loginField(type='text', placeholder='email')
+            .loginBlock
+              h5 password:
+              input#passwordInput.loginField(type='password', placeholder='password')
+            .authButtonSection
+              #loginButton.authButton Login
+              a.authButton.fb(href='/account/facebook/login/')
+                .icon-facebook
+                #facebookText facebook login
+              // {% include "socialaccount/snippets/login_extra.html" %}
+          script.
+            $('#csrf').attr('value',$.cookie().csrftoken);
+          // {% endif %}
+          #browse.headerLink
+            | browse
+            .linkSlider
+          #home.headerLink
+            | home
+            .linkSlider
+          #headerFade
+      section.center
+        aside.verticalPane.small
+          block topLeftPane
+
+          block middleLeftPane
+
+          block bottomLeftPane
+
+        section.verticalPane
+          block mainPane
+
+          block secondarySection
+
+          block thirdSection
+        #popupNotice.hidden
+          #noticeHeader
+          .noticeContent
+            img#gsIcon(src='/assets/icons/gsIcon.svg')
+            #noticeText
+          #noticeButton got it
+    block lastScript
+
